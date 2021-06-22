@@ -1,0 +1,110 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+    
+    .cuerpo {
+        background: var(--gris);
+    }
+
+    :root{
+        --rojo:#A0341D;
+        --naranja:#F5B041;
+        --azul:#5499C7;
+        --verdeagua:#39DCC3;
+        --azulcielo:#A9CCE3;  
+        --negro:#17202A;
+        --morado:#C8A2C8;
+        --gris:#9c9c9c;
+    }
+
+    .diseño-iniciar-sesión {
+        background: var(--negro);
+        width: 25rem;
+        padding: 3rem;
+        margin: auto;
+        margin-top: 10rem;
+        margin-bottom: -2.5rem;
+        border-radius: 3.12rem;
+        box-shadow: 7px 13px 20px var(--morado);
+        }
+    
+    .diseño-iniciar-sesión h4 {
+        font-size: 1.4rem;
+        margin-bottom: 0.5rem;
+        color: var(--azulcielo);
+    }
+
+    .diseño-iniciar-sesión h5 {
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem;
+        color: var(--azulcielo);
+    }
+
+    .diseño-ce {
+        width: 19rem;
+        background: var(--azulcielo);
+        padding: 0.5rem;
+        border-radius: 0.5rem;
+        margin-bottom: 1rem;
+        border: 0.2rem solid var(--azulcielo);
+        font-family: 'Arial';
+        color: var(--negro);
+    }
+
+    .diseño-iniciar-sesión .boton-continuar {
+        width: 100%;
+        background: var(--azul);
+        border: none;
+        border-radius: 0.2rem;
+        padding: 0.4rem;
+        color: var(--negro);
+        font-size: 1rem;
+        margin-top: 0rem;
+    }
+    
+    .diseño-iniciar-sesión p {
+        text-align: center;
+        font-family: 'Arial';
+        font-size: 0.85rem;
+        color: var(--azulcielo);
+        margin-top: 1rem;
+    }
+
+    .diseño-iniciar-sesión a {
+        font-size: 0.85rem;
+        color: var(--morado);
+        text-decoration: none;
+    }
+        
+    .diseño-iniciar-sesión a:hover {
+            font-size: 0.85rem;
+            color: var(--morado);
+            text-decoration: underline;
+    }
+
+    .diseño-crear-cuenta {
+        width: 25rem;
+        padding: 3rem;
+        margin:auto;
+        margin-top: 2rem;
+    }
+
+    .diseño-crear-cuenta .nuevo {
+        text-align: center;
+        color: var(--negro);
+        font-size: 1rem;
+        font-family: Arial;
+    }
+
+    .diseño-crear-cuenta .boton-crear {
+        width: 100%;
+        background: var(--azul);
+        border: none;
+        border-radius: 0.2rem;
+        padding: 0.4rem;
+        color: var(--negro);
+        font-size: 1rem;
+        margin-top: 0.5rem;
+    }
