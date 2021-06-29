@@ -5,7 +5,7 @@ box-sizing: border-box;
 }
 
 .cuerpo {
-background: var(--gris);
+background: var(--white);
 }
 :root{
     --rojo:#A0341D;
@@ -16,11 +16,12 @@ background: var(--gris);
     --negro:#17202A;
     --morado:#C8A2C8;
     --gris:#9c9c9c;
+    --white:#ffff;
 
 }
 
 .diseño-registro {
-background: var(--negro);
+background: var(--morado);
 width: 25rem;
 padding: 3rem;
 margin:auto;
@@ -36,16 +37,16 @@ color: var(--negro);
 .diseño-registro h4 {
 font-size: 1.4rem;
 margin-bottom: 1.5rem;
-color: var(--azulcielo);
+color: var(--white);
 }
 
 .diseño-c {
 width: 19rem;
-background: var(--azulcielo);
+background: var(--white);
 padding: 0.5rem;
 border-radius: 0.5rem;
 margin-bottom: 1rem;
-border: 0.2rem solid var(--azulcielo);
+border: 0.2rem solid var(--white);
 font-family: 'Arial';
 color: var(--negro);
 }
@@ -54,24 +55,24 @@ color: var(--negro);
 text-align: center;
 font-family: 'Arial';
 font-size: 0.85rem;
-color: var(--azulcielo);
+color: var(--white);
 }
 
 .diseño-registro a {
 font-size: 0.85rem;
-color: var(--morado);
+color: var(--naranja);
 text-decoration: none;
 }
 
 .diseño-registro a:hover {
     font-size: 0.85rem;
-    color: var(--morado);
+    color: var(--naranja);
     text-decoration: underline;
 }
 
 .diseño-registro .boton-r {
 width: 100%;
-background: var(--azul);
+background: var(--naranja);
 border: none;
 border-radius: 0.2rem;
 padding: 0.4rem;

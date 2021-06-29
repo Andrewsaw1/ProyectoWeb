@@ -5,7 +5,7 @@
     }
     
     .cuerpo {
-        background: var(--gris);
+        background: var(--blanco);
     }
 
     :root{
@@ -13,14 +13,15 @@
         --naranja:#F5B041;
         --azul:#5499C7;
         --verdeagua:#39DCC3;
-        --azulcielo:#A9CCE3;  
         --negro:#17202A;
+        --purpura:#DC9AFE;
         --morado:#C8A2C8;
         --gris:#9c9c9c;
+        --blanco:#ffff;
     }
 
     .diseño-iniciar-sesión {
-        background: var(--negro);
+        background: var(--purpura);
         width: 25rem;
         padding: 3rem;
         margin: auto;
@@ -33,29 +34,29 @@
     .diseño-iniciar-sesión h4 {
         font-size: 1.4rem;
         margin-bottom: 0.5rem;
-        color: var(--azulcielo);
+        color: var(--blanco);
     }
 
     .diseño-iniciar-sesión h5 {
         font-size: 0.8rem;
         margin-bottom: 0.5rem;
-        color: var(--azulcielo);
+        color: var(--blanco);
     }
 
     .diseño-ce {
         width: 19rem;
-        background: var(--azulcielo);
+        background: var(--blanco);
         padding: 0.5rem;
         border-radius: 0.5rem;
         margin-bottom: 1rem;
-        border: 0.2rem solid var(--azulcielo);
+        border: 0.2rem solid var(--blanco);
         font-family: 'Arial';
         color: var(--negro);
     }
 
     .diseño-iniciar-sesión .boton-continuar {
         width: 100%;
-        background: var(--azul);
+        background: var(--morado);
         border: none;
         border-radius: 0.2rem;
         padding: 0.4rem;
@@ -68,7 +69,7 @@
         text-align: center;
         font-family: 'Arial';
         font-size: 0.85rem;
-        color: var(--azulcielo);
+        color: var(--blanco);
         margin-top: 1rem;
     }
 
@@ -80,7 +81,7 @@
         
     .diseño-iniciar-sesión a:hover {
             font-size: 0.85rem;
-            color: var(--morado);
+            color: var(--naranja);
             text-decoration: underline;
     }
 
@@ -93,18 +94,18 @@
 
     .diseño-crear-cuenta .nuevo {
         text-align: center;
-        color: var(--negro);
+        color: var(--naranja);
         font-size: 1rem;
         font-family: Arial;
     }
 
     .diseño-crear-cuenta .boton-crear {
         width: 100%;
-        background: var(--azul);
+        background: var(--blanco);
         border: none;
         border-radius: 0.2rem;
         padding: 0.4rem;
-        color: var(--negro);
+        color: var(--naranja);
         font-size: 1rem;
         margin-top: 0.5rem;
     }
