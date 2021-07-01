@@ -3,7 +3,7 @@
         private $server="localhost";
         private $usr="root";
         private $pass="";
-        private $db ="pruebaProductos";
+        private $db ="supercito";
         public function conectar(){
             $mysqli = new mysqli($this->server,
                                 $this->usr,
