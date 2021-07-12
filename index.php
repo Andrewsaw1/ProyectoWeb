@@ -14,9 +14,15 @@ include('Controlador/ControllerListar.php');
     <title>Supersito</title>
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+    <link rel="stylesheet" href="Vista/css/aside-bar.css">
 </head>
 
 <body>
+    <div class="contenido">
+        <?php
+        require_once('Vista/php/aside.php');
+        ?>
+    </div>
 
     <div id="bar-nav">
         <div id="logo">
@@ -29,7 +35,7 @@ include('Controlador/ControllerListar.php');
         <a class="btnMenu icon-align-justify"></a>
         <div id="der" class="derOcultar">
             <a class="bar-der animacion textMenu" href="Vista/html/Ingresar.html">Iniciar sesión</a>
-            <a class="bar-der animacion textMenu" href="">Pedidos</a>
+            <a class="bar-der animacion textMenu" href="Vista/php/carrito.php">Pedidos</a>
             <a class="bar-der animacion carrito" href=""><span class="icon-shopping-cart"></a>
         </div>
     </div>
@@ -39,16 +45,16 @@ include('Controlador/ControllerListar.php');
     <div class="cards-content">
         <div class="container">
             <?php
-            while ($fila=$lista->fetch_assoc()) {
+            while ($fila = $lista->fetch_assoc()) {
                 echo '
                 <div class="card">
                     <div class="imgBx">
-                        <img src="data:image/jpg;base64, '.base64_encode($fila['Imagen']).'"alt="">
+                        <img src="data:image/jpg;base64, ' . base64_encode($fila['Imagen']) . '"alt="">
                     </div>
                     <div class="content">
-                        <h2>'.$fila['Nombre'].'</h2>
+                        <h2>' . $fila['Nombre'] . '</h2>
                         <h3>Descripcion: <a class="descripcion" href="#">Leer más...</a></h3>
-                        <h3>Precio: $'.$fila['Precio'].'</h3>
+                        <h3>Precio: $' . $fila['Precio'] . '</h3>
                         <button class="btn btn-primary" type="submit"><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
                     </div>
                 </div>';
@@ -68,7 +74,7 @@ include('Controlador/ControllerListar.php');
                         <h3>Precio: $10</h3>
                         <button class="btn btn-primary" type="submit"><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
                         <!--input type="button" value="Agregar" id="comprar"-->
-                        </form>
+                    </form>
                 </div>
             </div>
             <div class="card">
@@ -85,7 +91,7 @@ include('Controlador/ControllerListar.php');
                         <h3>Precio:</h3>
                         <button class="btn btn-primary" type="submit"><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
                         <!--input type="button" value="Agregar" id="comprar"-->
-                        </form>
+                    </form>
                 </div>
             </div>
             <div class="card">
@@ -102,7 +108,7 @@ include('Controlador/ControllerListar.php');
                         <h3>Precio:</h3>
                         <button class="btn btn-primary" type="submit"><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
                         <!--input type="button" value="Agregar" id="comprar"-->
-                        </form>
+                    </form>
                 </div>
             </div>
             <div class="card">
@@ -119,7 +125,7 @@ include('Controlador/ControllerListar.php');
                         <h3>Precio:</h3>
                         <button class="btn btn-primary" type="submit"><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
                         <!--input type="button" value="Agregar" id="comprar"-->
-                        </form>
+                    </form>
                 </div>
             </div>
             <div class="card">
@@ -136,7 +142,7 @@ include('Controlador/ControllerListar.php');
                         <h3>Precio:</h3>
                         <button class="btn btn-primary" type="submit"><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
                         <!--input type="button" value="Agregar" id="comprar"-->
-                        </form>
+                    </form>
                 </div>
             </div>
         </div>
