@@ -1,6 +1,6 @@
 <?php
-// include 'Modelo/ConsultarProductos.php';
 session_start();
+include('Controlador/ControllerListar.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -141,20 +141,20 @@ session_start();
     <div class="cards-content">
         <div class="container">
             <?php
-            // while ($fila=$stmt->fetch_assoc()) {
-            //     echo '
-            //     <div class="card">
-            //         <div class="imgBx">
-            //             <img src="data:image/jpg;base64, '.base64_encode($fila['imagen']).'"alt="">
-            //         </div>
-            //         <div class="content">
-            //             <h2>'.$fila['nombre'].'</h2>
-            //             <h3>Descripcion: <a class="descripcion" href="#">Leer más...</a></h3>
-            //             <h3>Precio: $'.$fila['precio'].'</h3>
-            //             <input type="button" value="Agregar" id="comprar">
-            //         </div>
-            //     </div>';
-            // }
+            while ($fila=$lista->fetch_assoc()) {
+                echo '
+                <div class="card">
+                    <div class="imgBx">
+                        <img src="data:image/jpg;base64, '.base64_encode($fila['Imagen']).'"alt="">
+                    </div>
+                    <div class="content">
+                        <h2>'.$fila['Nombre'].'</h2>
+                        <h3>Descripcion: <a class="descripcion" href="#">Leer más...</a></h3>
+                        <h3>Precio: $'.$fila['Precio'].'</h3>
+                        <button class="btn btn-primary" type="submit"><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
+                    </div>
+                </div>';
+            }
             ?>
             <div class="card">
                 <div class="imgBx">
