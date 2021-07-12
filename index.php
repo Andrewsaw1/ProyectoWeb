@@ -131,8 +131,8 @@ session_start();
         <a class="btnMenu icon-align-justify"></a>
         <div id="der" class="derOcultar">
             <a class="bar-der animacion textMenu" href="Vista/html/Ingresar.html">Iniciar sesión</a>
-            <!--a class="bar-der animacion textMenu" href="">Pedidos</a-->
-            <!--a class="bar-der animacion carrito" href=""><span class="icon-shopping-cart"></a-->
+            <a class="bar-der animacion textMenu" href="">Pedidos</a>
+            <a class="bar-der animacion carrito" href=""><span class="icon-shopping-cart"></a>
         </div>
     </div>
 
