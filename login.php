@@ -41,7 +41,7 @@
     <?php endif; ?>
 
     <h1>Iniciar Sesión</h1>
-    <span>o <a href="singup.php">Registrarse</a></span>
+    <span>o <a href="signup.php">Registrarse</a></span>
 
     <form action="login.php" method="POST">
       <input name="email" type="text" placeholder="Ingrese su correo electrónico">
