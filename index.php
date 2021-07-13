@@ -1,6 +1,21 @@
 <?php
 session_start();
 include('Controlador/ControllerListar.php');
+
+require 'database.php';
+
+if (isset($_SESSION['user_id'])) {
+  $records = $conn->prepare('SELECT id, email, password FROM users WHERE id = :id');
+  $records->bindParam(':id', $_SESSION['user_id']);
+  $records->execute();
+  $results = $records->fetch(PDO::FETCH_ASSOC);
+
+  $user = null;
+
+  if (count($results) > 0) {
+    $user = $results;
+  }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,17 +27,127 @@ include('Controlador/ControllerListar.php');
     <link rel="stylesheet" href="Vista/icomoon/fonts/style.css">
     <link rel="stylesheet" href="Vista/css/estilosI.css">
     <title>Supersito</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
-    <link rel="stylesheet" href="Vista/css/aside-bar.css">
+    <link rel="stylesheet" href="Vista/css/Diseño-Login.css">
 </head>
 
 <body>
-    <div class="contenido">
-        <?php
-        require_once('Vista/php/aside.php');
-        ?>
+    <?php require 'partials/header.php' ?>
+
+    <?php if(!empty($user)): ?>
+    <br>Bienvenido. <?= $user['email']; ?>
+    <br>Has ingresado exitosamente!
+    <a href="logout.php">
+        Salir
+    </a>
+    <?php else: ?>
+    <h1>Inicie sesión o registrese.</h1>
+
+    <a href="login.php">Iniciar sesión</a> or
+    <a href="signup.php">Registrarse</a>
+    <?php endif; ?>
+    <?php
+
+    $carrito_mio = $_SESSION['carrito'];
+    $_SESSION['carrito'] = $carrito_mio;
+    $totalcantidad=0;
+
+    // contamos nuestro carrito
+    if (isset($_SESSION['carrito'])) {
+        for ($i = 0; $i <= count($carrito_mio) - 1; $i++) {
+            if ($carrito_mio[$i] != NULL) {
+                $total_cantidad = $carrito_mio['cantidad'];
+                $total_cantidad++;
+                $totalcantidad += $total_cantidad;
+            }
+        }
+    }
+    ?>
+
+    <!-- NAVBAR -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#modal_cart" style="color: red;"><i class="fas fa-shopping-cart"></i> <?php echo $totalcantidad;?></a>
+                </li>
+            </ul>
+        </div>
+        </div>
+    </nav>
+    <!-- END NAVBAR -->
+
+
+
+    <!-- Ventana CARRITO -->
+    <div class="modal fade" id="modal_cart" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Carrito</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+
+
+                    <div class="modal-body">
+                        <div>
+                            <div class="p-2">
+                                <ul class="list-group mb-3">
+                                    <?
+                                    if (isset($_SESSION['carrito'])) {
+                                        $total = 0;
+                                        for ($i = 0; $i <= count($carrito_mio) - 1; $i++) {
+                                            if ($carrito_mio[$i] != NULL) {
+                                    ?>
+                                                <li class="list-group-item d-flex justify-content-between lh-condensed">
+                                                    <div class="row col-12">
+                                                        <div class="col-6 p-0" style="text-align: left; color: #000000;">
+                                                            <h6 class="my-0">Cantidad: <?php echo $carrito_mio[$i]['cantidad'] ?> : <? echo $carrito_mio[$i]['titulo']; // echo substr($carrito_mio[$i]['titulo'],0,10); echo utf8_decode($titulomostrado)."..."; 
+                                                                                                                                    ?></h6>
+                                                        </div>
+                                                        <div class="col-6 p-0" style="text-align: right; color: #000000;">
+                                                            <span class="text-muted" style="text-align: right; color: #000000;"><? echo $carrito_mio[$i]['precio'] * $carrito_mio[$i]['cantidad'];    ?> $</span>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                    <?
+                                                $total = $total + ($carrito_mio[$i]['precio'] * $carrito_mio[$i]['cantidad']);
+                                            }
+                                        }
+                                    }
+                                    ?>
+                                    <li class="list-group-item d-flex justify-content-between">
+                                        <span style="text-align: left; color: #000000;">Total (MEX)</span>
+                                        <strong style="text-align: left; color: #000000;"> $<?php
+                                                                                            if (isset($_SESSION['carrito'])) {
+                                                                                                $total = 0;
+                                                                                                for ($i = 0; $i <= count($carrito_mio) - 1; $i++) {
+                                                                                                    if ($carrito_mio[$i] != NULL) {
+                                                                                                        $total = $total + ($carrito_mio[$i]['precio'] * $carrito_mio[$i]['cantidad']);
+                                                                                                    }
+                                                                                                }
+                                                                                            }
+                                                                                            echo $total; ?> MXN</strong>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a type="button" class="btn btn-primary" href="Vista/html/index-pago.html">Pagar</a>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <a type="button" class="btn btn-primary" href="borrarcarro.php">Vaciar carrito</a>
+                </div>
+            </div>
+        </div>
     </div>
+    <!-- END VENTANA CARRITO -->
 
     <div id="bar-nav">
         <div id="logo">
@@ -35,8 +160,8 @@ include('Controlador/ControllerListar.php');
         <a class="btnMenu icon-align-justify"></a>
         <div id="der" class="derOcultar">
             <a class="bar-der animacion textMenu" href="Vista/html/Ingresar.html">Iniciar sesión</a>
-            <a class="bar-der animacion textMenu" href="Vista/php/carrito.php">Pedidos</a>
-            <a class="bar-der animacion carrito" href=""><span class="icon-shopping-cart"></a>
+            <!--a class="bar-der animacion textMenu" href="">Pedidos</a-->
+            <!--a class="bar-der animacion carrito" href=""><span class="icon-shopping-cart"></a-->
         </div>
     </div>
 
@@ -45,16 +170,16 @@ include('Controlador/ControllerListar.php');
     <div class="cards-content">
         <div class="container">
             <?php
-            while ($fila = $lista->fetch_assoc()) {
+            while ($fila=$lista->fetch_assoc()) {
                 echo '
                 <div class="card">
                     <div class="imgBx">
-                        <img src="data:image/jpg;base64, ' . base64_encode($fila['Imagen']) . '"alt="">
+                        <img src="data:image/jpg;base64, '.base64_encode($fila['Imagen']).'"alt="">
                     </div>
                     <div class="content">
-                        <h2>' . $fila['Nombre'] . '</h2>
+                        <h2>'.$fila['Nombre'].'</h2>
                         <h3>Descripcion: <a class="descripcion" href="#">Leer más...</a></h3>
-                        <h3>Precio: $' . $fila['Precio'] . '</h3>
+                        <h3>Precio: $'.$fila['Precio'].'</h3>
                         <button class="btn btn-primary" type="submit"><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
                     </div>
                 </div>';
@@ -74,7 +199,7 @@ include('Controlador/ControllerListar.php');
                         <h3>Precio: $10</h3>
                         <button class="btn btn-primary" type="submit"><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
                         <!--input type="button" value="Agregar" id="comprar"-->
-                    </form>
+                        </form>
                 </div>
             </div>
             <div class="card">
@@ -91,7 +216,7 @@ include('Controlador/ControllerListar.php');
                         <h3>Precio:</h3>
                         <button class="btn btn-primary" type="submit"><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
                         <!--input type="button" value="Agregar" id="comprar"-->
-                    </form>
+                        </form>
                 </div>
             </div>
             <div class="card">
@@ -108,7 +233,7 @@ include('Controlador/ControllerListar.php');
                         <h3>Precio:</h3>
                         <button class="btn btn-primary" type="submit"><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
                         <!--input type="button" value="Agregar" id="comprar"-->
-                    </form>
+                        </form>
                 </div>
             </div>
             <div class="card">
@@ -125,7 +250,7 @@ include('Controlador/ControllerListar.php');
                         <h3>Precio:</h3>
                         <button class="btn btn-primary" type="submit"><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
                         <!--input type="button" value="Agregar" id="comprar"-->
-                    </form>
+                        </form>
                 </div>
             </div>
             <div class="card">
@@ -142,7 +267,7 @@ include('Controlador/ControllerListar.php');
                         <h3>Precio:</h3>
                         <button class="btn btn-primary" type="submit"><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
                         <!--input type="button" value="Agregar" id="comprar"-->
-                    </form>
+                        </form>
                 </div>
             </div>
         </div>
