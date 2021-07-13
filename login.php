@@ -31,7 +31,7 @@
     <meta charset="utf-8">
     <title>Login</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="Vista/css/Diseño-Login.css">
   </head>
   <body>
     <?php require 'partials/header.php' ?>
@@ -41,12 +41,12 @@
     <?php endif; ?>
 
     <h1>Iniciar Sesión</h1>
-    <span>o <a href="signup.php">Registrarse</a></span>
+    <span>o <a href="singup.php">Registrarse</a></span>
 
     <form action="login.php" method="POST">
       <input name="email" type="text" placeholder="Ingrese su correo electrónico">
       <input name="password" type="password" placeholder="Ingrese su contraseña">
-      <input type="submit" value="Enviar">
+      <input type="submit" value="Iniciar Sesion">
     </form>
   </body>
 </html>

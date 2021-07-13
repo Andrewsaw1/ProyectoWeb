@@ -24,7 +24,7 @@
     <meta charset="utf-8">
     <title>Registrarse</title>
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="Vista/css/Diseño-Login.css">
   </head>
   <body>
 
@@ -41,7 +41,7 @@
       <input name="email" type="text" placeholder="Ingrese su correo electrónico">
       <input name="password" type="password" placeholder="Ingrese su contraseña">
       <input name="confirm_password" type="password" placeholder="Vuelva a ingresar su contraseña">
-      <input type="submit" value="Submit">
+      <input type="submit" value="Registrar">
     </form>
 
   </body>

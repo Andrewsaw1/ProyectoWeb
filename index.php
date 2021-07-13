@@ -47,7 +47,7 @@ if (isset($_SESSION['user_id'])) {
     <h1>Inicie sesión o registrese.</h1>
 
     <a href="login.php">Iniciar sesión</a> or
-    <a href="signup.php">Registrarse</a>
+    <a href="singup.php">Registrarse</a>
     <?php endif; ?>
     <?php
 
