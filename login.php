@@ -8,7 +8,7 @@
   require 'database.php';
 
   if (!empty($_POST['email']) && !empty($_POST['password'])) {
-    $records = $conn->prepare('SELECT id, email, password FROM users WHERE email = :email');
+    $records = $conn->prepare('SELECT idUserLog, email, password FROM usuarioslogin WHERE email = :email');
     $records->bindParam(':email', $_POST['email']);
     $records->execute();
     $results = $records->fetch(PDO::FETCH_ASSOC);
@@ -16,8 +16,8 @@
     $message = '';
 
     if (count($results) > 0 && password_verify($_POST['password'], $results['password'])) {
-      $_SESSION['user_id'] = $results['id'];
-      header("Location: /ProyectoWeb");
+      $_SESSION['user_id'] = $results['idUserLog'];
+      header('Location:/Vista/php/indexusuario.php');
     } else {
       $message = 'Lo siento, información no válida';
     }

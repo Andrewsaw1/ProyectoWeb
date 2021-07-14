@@ -5,16 +5,16 @@ include('Controlador/ControllerListar.php');
 require 'database.php';
 
 if (isset($_SESSION['user_id'])) {
-  $records = $conn->prepare('SELECT id, email, password FROM users WHERE id = :id');
-  $records->bindParam(':id', $_SESSION['user_id']);
-  $records->execute();
-  $results = $records->fetch(PDO::FETCH_ASSOC);
+    $records = $conn->prepare('SELECT idUserLog, email, password FROM usuarioslogin WHERE idUserLog = :id');
+    $records->bindParam(':id', $_SESSION['user_id']);
+    $records->execute();
+    $results = $records->fetch(PDO::FETCH_ASSOC);
 
-  $user = null;
+    $user = null;
 
-  if (count($results) > 0) {
-    $user = $results;
-  }
+    if (count($results) > 0) {
+        $user = $results;
+    }
 }
 ?>
 <!DOCTYPE html>
@@ -37,23 +37,23 @@ if (isset($_SESSION['user_id'])) {
 <body>
     <?php require 'partials/header.php' ?>
 
-    <?php if(!empty($user)): ?>
-    <br>Bienvenido. <?= $user['email']; ?>
-    <br>Has ingresado exitosamente!
-    <a href="logout.php">
-        Salir
-    </a>
-    <?php else: ?>
-    <h1>Inicie sesión o registrese.</h1>
+    <?php if (!empty($user)) : ?>
+        <br>Bienvenido. <?= $user['email']; ?>
+        <br>Has ingresado exitosamente!
+        <a href="logout.php">
+            Salir
+        </a>
+    <?php else : ?>
+        <h1>Inicie sesión o registrese para realizar compra</h1>
 
-    <a href="login.php">Iniciar sesión</a> or
-    <a href="signup.php">Registrarse</a>
+        <!--a href="login.php">Iniciar sesión</a> or
+        <a href="signup.php">Registrarse</a-->
     <?php endif; ?>
     <?php
 
     $carrito_mio = $_SESSION['carrito'];
     $_SESSION['carrito'] = $carrito_mio;
-    $totalcantidad=0;
+    $totalcantidad = 0;
 
     // contamos nuestro carrito
     if (isset($_SESSION['carrito'])) {
@@ -72,7 +72,7 @@ if (isset($_SESSION['user_id'])) {
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#modal_cart" style="color: red;"><i class="fas fa-shopping-cart"></i> <?php echo $totalcantidad;?></a>
+                    <a class="nav-link" data-bs-toggle="modal" data-bs-target="#modal_cart" style="color: red;"><i class="fas fa-shopping-cart"></i> <?php echo $totalcantidad; ?></a>
                 </li>
             </ul>
         </div>
@@ -159,7 +159,7 @@ if (isset($_SESSION['user_id'])) {
         </form>
         <a class="btnMenu icon-align-justify"></a>
         <div id="der" class="derOcultar">
-            <a class="bar-der animacion textMenu" href="Vista/html/Ingresar.html">Iniciar sesión</a>
+            <a class="bar-der animacion textMenu" href="login.php">Iniciar sesión</a>
             <!--a class="bar-der animacion textMenu" href="">Pedidos</a-->
             <!--a class="bar-der animacion carrito" href=""><span class="icon-shopping-cart"></a-->
         </div>
@@ -170,16 +170,16 @@ if (isset($_SESSION['user_id'])) {
     <div class="cards-content">
         <div class="container">
             <?php
-            while ($fila=$lista->fetch_assoc()) {
+            while ($fila = $lista->fetch_assoc()) {
                 echo '
                 <div class="card">
                     <div class="imgBx">
-                        <img src="data:image/jpg;base64, '.base64_encode($fila['Imagen']).'"alt="">
+                        <img src="data:image/jpg;base64, ' . base64_encode($fila['Imagen']) . '"alt="">
                     </div>
                     <div class="content">
-                        <h2>'.$fila['Nombre'].'</h2>
+                        <h2>' . $fila['Nombre'] . '</h2>
                         <h3>Descripcion: <a class="descripcion" href="#">Leer más...</a></h3>
-                        <h3>Precio: $'.$fila['Precio'].'</h3>
+                        <h3>Precio: $' . $fila['Precio'] . '</h3>
                         <button class="btn btn-primary" type="submit"><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
                     </div>
                 </div>';
@@ -194,12 +194,15 @@ if (isset($_SESSION['user_id'])) {
                         <input name="precio" type="hidden" id="precio" value="10" />
                         <input name="titulo" type="hidden" id="titulo" value="articulo 1" />
                         <input name="cantidad" type="hidden" id="cantidad" value="1" class="pl-2" />
-                        <h2>Carta</h2>
-                        <h3>Descripcion: <a class="descripcion" href="#">Leer más...</a></h3>
-                        <h3>Precio: $10</h3>
-                        <button class="btn btn-primary" type="submit"><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
-                        <!--input type="button" value="Agregar" id="comprar"-->
-                        </form>
+                        <div class="card-body">
+                            <h5 class="card-title">Carta</h5>
+                            <p class="card-text">Descripción - Precio $10</p>
+                            <h3>Descripcion: <a class="descripcion" href="#">Leer más...</a></h3>
+                            <h3>Precio: $10</h3>
+                            <button class="btn btn-primary" type="submit"><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
+                            <!--input type="button" value="Agregar" id="comprar"-->
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="card">
@@ -216,7 +219,7 @@ if (isset($_SESSION['user_id'])) {
                         <h3>Precio:</h3>
                         <button class="btn btn-primary" type="submit"><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
                         <!--input type="button" value="Agregar" id="comprar"-->
-                        </form>
+                    </form>
                 </div>
             </div>
             <div class="card">
@@ -233,7 +236,7 @@ if (isset($_SESSION['user_id'])) {
                         <h3>Precio:</h3>
                         <button class="btn btn-primary" type="submit"><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
                         <!--input type="button" value="Agregar" id="comprar"-->
-                        </form>
+                    </form>
                 </div>
             </div>
             <div class="card">
@@ -250,7 +253,7 @@ if (isset($_SESSION['user_id'])) {
                         <h3>Precio:</h3>
                         <button class="btn btn-primary" type="submit"><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
                         <!--input type="button" value="Agregar" id="comprar"-->
-                        </form>
+                    </form>
                 </div>
             </div>
             <div class="card">
@@ -267,7 +270,7 @@ if (isset($_SESSION['user_id'])) {
                         <h3>Precio:</h3>
                         <button class="btn btn-primary" type="submit"><i class="fas fa-shopping-cart"></i> Añadir al carrito</button>
                         <!--input type="button" value="Agregar" id="comprar"-->
-                        </form>
+                    </form>
                 </div>
             </div>
         </div>
